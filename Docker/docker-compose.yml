@@ -1,0 +1,31 @@
+services:
+  app:
+    container_name: express_ts
+    build: ../.
+    restart: always
+    ports:
+      - 5000:5000
+    volumes:
+      - ..:/app
+    networks:
+      - backend
+
+  postgres:
+    container_name: postgres_ts
+    image: postgres:15.3-alpine
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+    ports:
+      - 5432:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: backend_network
+    driver: bridge

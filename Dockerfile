@@ -4,14 +4,8 @@ WORKDIR /app
 
 COPY . ./
 
-RUN npm i --prod
+RUN npm install
 
-RUN npm i webpack webpack-node-externals tsconfig-paths-webpack-plugin -D
+CMD [ "npm", "run", "service" ]
 
-RUN npm run build
-
-RUN npm uninstall webpack webpack-node-externals tsconfig-paths-webpack-plugin
-
-COPY dist ./dist
-
-CMD [ "yarn", "start" ]
+EXPOSE 5000
